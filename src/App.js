@@ -1,0 +1,205 @@
+import React, { useState, useEffect } from 'react';
+import { Container, Typography, Paper, Box } from '@mui/material';
+import DonationWidget from './DonationWidget';
+import PriceChart from './Chart';
+
+function App() {
+  document.title = "Kaspa Rainbow Chart";
+
+  const [priceData, setPriceData] = useState({});
+
+  useEffect(() => {
+    fetch('/prices.json')
+      .then((response) => response.json())
+      .then((data) => {
+        const transformedData = data.map((item) => {
+          return {
+            date: item.date,
+            price: parseFloat(parseFloat(item.price.replace('$', '')).toFixed(7)),
+          };
+        });
+        setPriceData(transformedData);
+      })
+      .catch((error) => console.error('Error fetching the prices data:', error));
+  }, []);
+
+  return (
+    <Container
+      maxWidth="lg"
+      style={{
+        backgroundColor: '#292828',
+        padding: '20px',
+        borderRadius: '10px',
+        color: '#fff',
+        marginTop: '20px',
+      }}
+    >
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        align="center"
+        style={{ color: '#fff', fontWeight: 'bolder' }}
+      >
+        Kaspa Rainbow Chart
+      </Typography>
+      <Typography
+        variant="h6"
+        component="h2"
+        gutterBottom
+        align="center"
+        style={{ color: '#ccc', marginBottom: '15px' }}
+      >
+        Price according to the power law
+      </Typography>
+      <PriceChart priceData={priceData}/>
+      <Typography
+        component="h4"
+        gutterBottom
+        align="center"
+        style={{ color: '#ccc', marginBottom: '15px' }}
+      >
+        Click and drag a region to zoom in. Double click to reset.
+      </Typography>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        marginBottom="20px"
+      >
+      </Box>
+      <Typography
+        variant="h5"
+        component="h2"
+        gutterBottom
+        align="center"
+        style={{ marginTop: '20px', color: 'white', fontWeight: 'bolder' }}
+      >
+        FAQ
+      </Typography>
+      <Paper
+        elevation={3}
+        style={{
+          padding: '20px',
+          backgroundColor: '#444',
+          borderRadius: '15px',
+        }}
+      >
+        <Typography variant="body1" component="p" style={{ color: '#fff' }}>
+          <strong>1) What is Kaspa's Power Law?</strong>
+        </Typography>
+        <Typography variant="body2" component="p" style={{ color: '#ccc' }}>
+          The Kaspa power law is a mathematical relationship between Kaspa's price and time, that allows us to forecast Kaspa's potential future price action based on historical data.
+          The power law is demonstrated by plotting Kaspa's price vs time in a log-log chart, where it appears as a straight line.
+        </Typography>
+        <Typography
+          variant="body2"
+          component="p"
+          style={{ marginTop: '10px', color: '#ccc' }}
+        >
+          The only other asset which behaves this way is Bitcoin.
+        </Typography>
+        <Typography variant="body1" component="p" style={{ color: '#fff', marginTop: 20 }}>
+          <strong>2) How accurate is it?</strong>
+        </Typography>
+        <Typography variant="body2" component="p" style={{ color: '#ccc' }}>
+          The R² of the linear regression in log-log is <b>0.95</b>. Meaning the power law accounts for 95% of the variance in log-prices. For comparison, the R² of Bitcoin is 0.96.
+        </Typography>
+        <Typography variant="body1" component="p" style={{ color: '#fff', marginTop: 20 }}>
+          <strong>3) How is this calculated?</strong>
+        </Typography>
+        <Typography variant="body2" component="p" style={{ color: '#ccc' }}>
+          Support price is calculated as 10^-13.41344198 * (ΔGB)^4.218461.
+        </Typography>
+        <Typography
+          variant="body2"
+          component="p"
+          style={{ marginTop: '10px', color: '#ccc' }}
+        >
+          Resistance price is calculated as 10^-13.10611888 * (ΔGB)^4.218461.
+        </Typography>
+        <Typography
+          variant="body2"
+          component="p"
+          style={{ marginTop: '10px', color: '#ccc' }}
+        >
+          Fair price is calculated as 10^-13.25978043 * (ΔGB)^4.218461.
+        </Typography>
+        <Typography
+          variant="body2"
+          component="p"
+          style={{ marginTop: '10px', color: '#ccc' }}
+        >
+          Where <b>ΔGB</b> is days since the Kaspa Genesis Block, the 7th of November, 2021.
+        </Typography>
+        <Typography
+          variant="body2"
+          component="p"
+          style={{ marginTop: '10px', color: '#ccc', fontStyle: 'italic' }}
+        >
+          [Power Law Equations Updated 2024-07-22]
+        </Typography>
+        <Typography variant="body1" component="p" style={{ color: '#fff', marginTop: 20 }}>
+          <strong>4) Where can I learn more about Kaspa?</strong>
+        </Typography>
+        <Typography variant="body2" component="p" style={{ color: '#ccc' }}>
+          Visit the Kaspa project's website: <a style={{ color: 'white' }} href="https://kaspa.org/">https://kaspa.org</a>.
+        </Typography>
+        <Typography
+          variant="body2"
+          component="p"
+          style={{ marginTop: '10px', color: '#ccc' }}
+        >
+          Check out streamlit's Kaspa rainbow chart: <a style={{ color: 'white' }} href="https://kasping.streamlit.app/">https://kasping.streamlit.app/</a>.
+        </Typography>
+        <Typography
+          variant="body2"
+          component="p"
+          style={{ marginTop: '10px', color: '#ccc' }}
+        >
+          Marvel at the growth of Kaspa's hash rate: <a style={{ color: 'white' }} href="https://2miners.com/kas-network-hashrate">https://2miners.com/kas-network-hashrate</a>.
+        </Typography>
+        <Typography
+          variant="body2"
+          component="p"
+          style={{ marginTop: '10px', color: '#ccc' }}
+        >
+          See Kaspa block-DAG processed in real time: <a style={{ color: 'white' }} href="https://kgi.kaspad.net/">https://kgi.kaspad.net/</a>.
+        </Typography>
+        <Typography
+          variant="body2"
+          component="p"
+          style={{ marginTop: '10px', color: '#ccc' }}
+        >
+          Check out the Kaspa Industrial Initiative: <a style={{ color: 'white' }} href="https://kaspa-kii.org/">https://kaspa-kii.org/</a>.
+        </Typography>
+        <Typography variant="body1" component="p" style={{ color: '#fff', marginTop: 20 }}>
+          <strong>5) How can I buy Kaspa?</strong>
+        </Typography>
+        <Typography variant="body2" component="p" style={{ color: '#ccc' }}>
+          I use the Tangem wallet (<a style={{ color: 'white' }} href="https://amzn.to/3W2Kp4Q">https://amzn.to/3W2Kp4Q</a>) to exchange BTC to KAS through the integrated swap, but you should do your own research to find the best option depending on your country and preferences.
+          I like using Tangem though since it provides cold storage for my Kaspa as well as backup cards.
+        </Typography>
+        <Typography
+          variant="body2"
+          component="p"
+          style={{ marginTop: '10px', color: '#ccc' }}
+        >
+          Note, the link above is an Amazon affiliate link which provides me a small percentage which is used to run this website. If you like this website, consider supporting!
+        </Typography>
+      </Paper>
+      <Typography variant="body1" component="p" style={{ color: '#fff', marginTop: 20, textAlign: 'center' }}>
+        <strong>Want to support this website?</strong>
+      </Typography>
+      <Typography variant="body2" component="p" style={{ color: '#ccc', marginBottom: 20, textAlign: 'center' }}>
+        If you find this website useful, consider donating some Kaspa. It helps me run the website and build more tools like this.
+      </Typography>
+      <DonationWidget/>
+      <Typography variant="body1" component="p" style={{ color: '#fff', marginTop: 40, textAlign: 'center' }}>
+        Credit to <a style={{ color: 'white' }} href="https://www.blockchaincenter.net/en/bitcoin-rainbow-chart/">https://www.blockchaincenter.net/en/bitcoin-rainbow-chart/</a> for the inspiration for this site.
+      </Typography>
+    </Container>
+  );
+}
+
+export default App;
