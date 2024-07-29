@@ -220,10 +220,10 @@ const PriceChart = ({ priceData }) => {
         annotations: annotations
       },
       zoom: {
-        pan: {
-          enabled: true,
-          mode: 'xy',
-        },
+        // pan: {
+        //   enabled: true,
+        //   mode: 'xy',
+        // },
         zoom: {
           drag: {
             enabled: true,
