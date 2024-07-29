@@ -92,6 +92,17 @@ const PriceChart = ({ priceData }) => {
       }
     }));
 
+  const isMobileDeviceWithTouch = () => {
+    // Check for touch events support
+    const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+  
+    // Check for mobile user agents
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const isMobile = /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase());
+  
+    return hasTouchScreen && isMobile;
+  };
+
   const priceDataPoints = Array.isArray(priceData) ? priceData.map(item => ({
     x: new Date(item.date).getTime(),
     y: item.price,
@@ -220,10 +231,10 @@ const PriceChart = ({ priceData }) => {
         annotations: annotations
       },
       zoom: {
-        // pan: {
-        //   enabled: true,
-        //   mode: 'xy',
-        // },
+        pan: {
+          enabled: isMobileDeviceWithTouch(),
+          mode: 'xy',
+        },
         zoom: {
           drag: {
             enabled: true,
@@ -235,9 +246,6 @@ const PriceChart = ({ priceData }) => {
           pinch: {
             enabled: true,
           },
-          // wheel: {
-          //   enabled: true,
-          // },
         },
       },
       tooltip: {
