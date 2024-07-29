@@ -165,6 +165,8 @@ const PriceChart = ({ priceData }) => {
   };
 
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     scales: {
       x: {
         type: 'time',
@@ -255,7 +257,7 @@ const PriceChart = ({ priceData }) => {
   };
 
   return (
-    <div>
+    <div style={{ position: 'relative', height: '80vh', width: '100%' }}>
       <Line ref={chartRef} data={data} options={options} />
     </div>
   );
