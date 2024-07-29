@@ -220,12 +220,6 @@ const PriceChart = ({ priceData }) => {
         annotations: annotations
       },
       zoom: {
-        pan: {
-          enabled: true,
-          mode: 'xy',
-          overScaleMode: 'xy',
-          threshold: 5,
-        },
         zoom: {
           drag: {
             enabled: true,
@@ -235,9 +229,6 @@ const PriceChart = ({ priceData }) => {
           },
           mode: 'xy',
           overScaleMode: 'xy',
-          pinch: {
-            enabled: true,
-          },
           touch: {
             enabled: true,
             mode: 'xy',
