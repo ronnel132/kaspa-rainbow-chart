@@ -70,7 +70,7 @@ function App() {
         align="center"
         style={{ color: '#ccc', marginBottom: '15px' }}
       >
-        { isMobile ?
+        { isMobileDeviceWithTouch() ?
           'Pinch to zoom. Double click to reset.' :
           'Click and drag a region to zoom in. Double click to reset.'
         }
