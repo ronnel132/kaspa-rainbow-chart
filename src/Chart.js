@@ -232,7 +232,7 @@ const PriceChart = ({ priceData, isMobile }) => {
             borderWidth: 1,
             backgroundColor: 'rgba(54, 162, 235, 0.3)',
           },
-          mode: 'x',
+          mode: 'xy',
           pinch: {
             enabled: isMobile,
           },
@@ -240,7 +240,7 @@ const PriceChart = ({ priceData, isMobile }) => {
       },
       tooltip: {
         mode: 'nearest',
-        intersect: false,
+        intersect: true,
         callbacks: {
           label: function(context) {
             const index = context.dataIndex;
