@@ -171,10 +171,10 @@ const PriceChart = ({ priceData }) => {
       x: {
         type: 'time',
         time: {
-          unit: 'year',
+          unit: 'month',
           tooltipFormat: 'yyyy-MM-dd',
           displayFormats: {
-            year: 'yyyy-MM-dd',
+            month: 'yyyy-MM-dd',
           }
         },
         min: startDate.getTime(),
@@ -184,11 +184,16 @@ const PriceChart = ({ priceData }) => {
           text: 'Date',
         },
         ticks: {
-          callback: function (value, index, values) {
+          callback: function (value) {
             const date = new Date(value);
-            return ' ' + date.toISOString().split('T')[0]; // Add space before date to move it left
+            return date.toISOString().split('T')[0].slice(0, 10); // Compact date format (yy-MM)
           },
+          maxRotation: 45, // Rotate labels diagonally
+          minRotation: 45,
         },
+        grid: {
+          color: 'rgba(100, 100, 100, 0.5)', // Lighter gray color for grid lines
+        }
       },
       y: {
         type: 'logarithmic',
@@ -205,6 +210,9 @@ const PriceChart = ({ priceData }) => {
             return null;
           },
         },
+        grid: {
+          color: 'rgba(211, 211, 211, 0.5)', // Lighter gray color for grid lines
+        }
       },
     },
     plugins: {
@@ -230,8 +238,10 @@ const PriceChart = ({ priceData }) => {
           pinch: {
             enabled: true,
           },
-          wheel: {
+          touch: {
             enabled: true,
+            mode: 'xy',
+            threshold: 5,
           },
         },
       },
