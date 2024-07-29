@@ -16,6 +16,7 @@ import {
   RedditIcon,
   TelegramIcon,
 } from 'react-share';
+import FollowMeOnX from './FollowMeOnX';
 
 function HomePage() {
   document.title = "Kaspa Rainbow Chart";
@@ -270,13 +271,10 @@ function HomePage() {
         </Typography>
       </Paper>
       <Typography variant="body1" component="p" style={{ color: '#fff', marginTop: 20, textAlign: 'center' }}>
-        <strong>Want to support this website?</strong>
+        <strong>Follow me on 𝕏</strong>
       </Typography>
-      <Typography variant="body2" component="p" style={{ color: '#ccc', marginBottom: 20, textAlign: 'center' }}>
-        If you find this website useful, consider donating some Kaspa. It helps me run the website and build more tools like this.
-      </Typography>
-      <DonationWidget/>
-      <Typography variant="body1" component="p" style={{ color: 'grey', marginTop: 40, textAlign: 'center' }}>
+      <FollowMeOnX/>
+      <Typography variant="body1" component="p" style={{ color: 'grey', marginTop: 20, textAlign: 'center' }}>
         <a style={{ color: 'white' }} href="/terms">Terms of Service</a>
       </Typography>
     </Container>
