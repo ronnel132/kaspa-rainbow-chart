@@ -70,7 +70,10 @@ function App() {
         align="center"
         style={{ color: '#ccc', marginBottom: '15px' }}
       >
-        Click and drag a region to zoom in. Double click to reset.
+        { isMobile ?
+          'Pinch to zoom. Double click to reset.' :
+          'Click and drag a region to zoom in. Double click to reset.'
+        }
       </Typography>
       <Typography
         component="h4"
