@@ -23,6 +23,17 @@ function App() {
       .catch((error) => console.error('Error fetching the prices data:', error));
   }, []);
 
+  const isMobileDeviceWithTouch = () => {
+    // Check for touch events support
+    const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+  
+    // Check for mobile user agents
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const isMobile = /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase());
+  
+    return hasTouchScreen && isMobile;
+  };
+
   return (
     <Container
       maxWidth="lg"
@@ -52,7 +63,7 @@ function App() {
       >
         Price according to the power law
       </Typography>
-      <PriceChart priceData={priceData}/>
+      <PriceChart priceData={priceData} isMobile={isMobileDeviceWithTouch()}/>
       <Typography
         component="h4"
         gutterBottom

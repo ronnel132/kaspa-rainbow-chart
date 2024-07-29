@@ -49,7 +49,7 @@ const getSupportPrice = (daysSinceGb) => {
   return parseFloat((Math.pow(10, -13.41344198) * Math.pow(daysSinceGb, 4.218461)).toFixed(7));
 };
 
-const PriceChart = ({ priceData }) => {
+const PriceChart = ({ priceData, isMobile }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
@@ -91,17 +91,6 @@ const PriceChart = ({ priceData }) => {
         color: 'black',
       }
     }));
-
-  const isMobileDeviceWithTouch = () => {
-    // Check for touch events support
-    const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-  
-    // Check for mobile user agents
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    const isMobile = /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase());
-  
-    return hasTouchScreen && isMobile;
-  };
 
   const priceDataPoints = Array.isArray(priceData) ? priceData.map(item => ({
     x: new Date(item.date).getTime(),
@@ -232,7 +221,7 @@ const PriceChart = ({ priceData }) => {
       },
       zoom: {
         pan: {
-          enabled: isMobileDeviceWithTouch(),
+          enabled: isMobile,
           mode: 'xy',
         },
         zoom: {
@@ -242,9 +231,9 @@ const PriceChart = ({ priceData }) => {
             borderWidth: 1,
             backgroundColor: 'rgba(54, 162, 235, 0.3)',
           },
-          mode: 'xy',
+          mode: 'x',
           pinch: {
-            enabled: true,
+            enabled: isMobile,
           },
         },
       },
