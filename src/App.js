@@ -61,6 +61,14 @@ function App() {
       >
         Click and drag a region to zoom in. Double click to reset.
       </Typography>
+      <Typography
+        component="h4"
+        gutterBottom
+        align="center"
+        style={{ color: '#ccc', marginTop: '35px', marginBottom: '15px' }}
+      >
+        Also check out <a style={{ color: "white" }} href="https://kaspapowerlaw.com">KaspaPowerLaw.com</a> for the Kaspa Fair Price Calculator.
+      </Typography>
       <Box
         display="flex"
         justifyContent="center"
@@ -177,15 +185,15 @@ function App() {
           <strong>5) How can I buy Kaspa?</strong>
         </Typography>
         <Typography variant="body2" component="p" style={{ color: '#ccc' }}>
-          I use the Tangem wallet (<a style={{ color: 'white' }} href="https://amzn.to/3W2Kp4Q">https://amzn.to/3W2Kp4Q</a>) to exchange BTC to KAS through the integrated swap, but you should do your own research to find the best option depending on your country and preferences.
-          I like using Tangem though since it provides cold storage for my Kaspa as well as backup cards.
+          I use the Tangem wallet (<a style={{ color: 'white' }} href="https://tangem.com/en/?promocode=KE8DCR">https://tangem.com</a>) to exchange BTC to KAS through the integrated swap.
+          I prefer Tangem for its ease of use, cold storage (keep your Kaspa off exchanges!) and backup cards.
         </Typography>
         <Typography
           variant="body2"
           component="p"
           style={{ marginTop: '10px', color: '#ccc' }}
         >
-          Note, the link above is an Amazon affiliate link which provides me a small percentage which is used to run this website. If you like this website, consider supporting!
+          The link above is a 10%-off referral link which provides me a small percentage to run this website. If you like my work, consider supporting.
         </Typography>
       </Paper>
       <Typography variant="body1" component="p" style={{ color: '#fff', marginTop: 20, textAlign: 'center' }}>
