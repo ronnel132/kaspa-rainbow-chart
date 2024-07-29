@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Typography, Paper, Box, Grid } from '@mui/material';
-import DonationWidget from './DonationWidget';
 import PriceChart from './Chart';
 import {
   FacebookShareButton,

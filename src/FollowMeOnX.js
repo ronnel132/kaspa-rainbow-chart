@@ -1,5 +1,4 @@
 import React from 'react';
-import { XIcon } from 'react-share';
 import x_profile from './assets/x_profile.jpg';
 
 const FollowMeOnX = () => {
