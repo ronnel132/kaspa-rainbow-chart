@@ -16,6 +16,7 @@ import {
 import 'chartjs-adapter-date-fns';
 import annotationPlugin from 'chartjs-plugin-annotation';
 import zoomPlugin from 'chartjs-plugin-zoom';
+import { parseISO, format } from 'date-fns';
 
 // Register necessary components
 ChartJS.register(
@@ -93,7 +94,7 @@ const PriceChart = ({ priceData, isMobile }) => {
     }));
 
   const priceDataPoints = Array.isArray(priceData) ? priceData.map(item => ({
-    x: new Date(item.date).getTime(),
+    x: parseISO(item.date).getTime(), // Parse date as ISO to handle time zone correctly
     y: item.price,
   })) : [];
 
@@ -186,7 +187,7 @@ const PriceChart = ({ priceData, isMobile }) => {
         ticks: {
           callback: function (value) {
             const date = new Date(value);
-            return date.toISOString().split('T')[0].slice(0, 10); // Compact date format (yy-MM)
+            return format(date, 'yyyy-MM-dd'); // Format the date to ensure it's displayed correctly
           },
           maxRotation: 45, // Rotate labels diagonally
           minRotation: 45,
