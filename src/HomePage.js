@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Typography, Paper, Box, Grid } from '@mui/material';
+import { Container, Typography, Paper, Box, Grid, Button } from '@mui/material';
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import PriceChart from './Chart';
 import {
   FacebookShareButton,
@@ -16,6 +18,9 @@ import {
   TelegramIcon,
 } from 'react-share';
 import FollowMeOnX from './FollowMeOnX';
+import tangem_step1 from './assets/tangem-step1.png';
+import tangem_step2 from './assets/tangem-step2.png';
+import tangem_step3 from './assets/tangem-step3.png';
 
 function HomePage() {
   document.title = "Kaspa Rainbow Chart";
@@ -38,13 +43,9 @@ function HomePage() {
   }, []);
 
   const isMobileDeviceWithTouch = () => {
-    // Check for touch events support
     const hasTouchScreen = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-  
-    // Check for mobile user agents
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
     const isMobile = /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent.toLowerCase());
-  
     return hasTouchScreen && isMobile;
   };
 
@@ -261,13 +262,71 @@ function HomePage() {
           I use the Tangem wallet (<a style={{ color: 'white' }} href="https://tangem.com/en/?promocode=KE8DCR">https://tangem.com</a>) to exchange BTC to KAS through the integrated swap.
           I prefer Tangem for its ease of use, cold storage (keep your Kaspa off exchanges!) and backup cards.
         </Typography>
-        <Typography
-          variant="body2"
-          component="p"
-          style={{ marginTop: '10px', color: '#ccc' }}
-        >
-          The link above is a 10%-off referral link which provides me a small percentage to run this website. If you like my work, consider supporting.
+        <Typography variant="body2" component="p" style={{ color: '#ccc', marginTop: '30px' }}>
+          <b style={{ color: '#d64242' }}>Step 1)</b> Transfer Bitcoin to your Tangem wallet address.
         </Typography>
+        <Typography variant="body2" component="p" style={{ color: '#ccc' }}>
+          <b style={{ color: '#d64242' }}>Step 2)</b> Click "Swap" and select the amount to transfer. Changelly and Changenow exchanges will work fine.
+        </Typography>
+        <Typography variant="body2" component="p" style={{ color: '#ccc' }}>
+          <b style={{ color: '#d64242' }}>Step 3)</b> Wait for the transfer, usually 30 minutes. Don't panic if you don't see it right away, it will go through.
+        </Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 3 }}>
+          <Button
+            href="https://tangem.com/en/?promocode=KE8DCR"
+            target="_blank"
+            variant="contained"
+            sx={{
+              backgroundColor: '#d64242',
+              color: '#fff',
+              '&:hover': { backgroundColor: '#bf3a3a' },
+              textTransform: 'none',
+            }}
+          >
+            Buy Now
+          </Button>
+          <Box
+            sx={{
+              ml: 1,
+              px: 1.5,
+              py: 0.5,
+              backgroundColor: '#FFD700',
+              borderRadius: '4px',
+              display: 'inline-block',
+            }}
+          >
+            <Typography variant="body2" style={{ fontWeight: 'bold' }}>
+              10% OFF
+            </Typography>
+          </Box>
+        </Box>
+
+        <Box sx={{ flexGrow: 1, mt: 2 }}>
+          {isMobileDeviceWithTouch() ? (
+            <>
+              <Typography variant="body2" align="center" style={{ color: '#d64242', marginBottom: '10px' }}>
+                Swipe left or right to view more images
+              </Typography>
+              <Carousel showThumbs={false} showStatus={false} infiniteLoop useKeyboardArrows>
+                <div><img src={tangem_step1} alt="Kaspa Screenshot 1" style={{ width: '100%', height: 'auto' }} /></div>
+                <div><img src={tangem_step2} alt="Kaspa Screenshot 2" style={{ width: '100%', height: 'auto' }} /></div>
+                <div><img src={tangem_step3} alt="Kaspa Screenshot 3" style={{ width: '100%', height: 'auto' }} /></div>
+              </Carousel>
+            </>
+          ) : (
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={4}>
+                <img src={tangem_step1} alt="Kaspa Screenshot 1" style={{ width: '100%', height: 'auto' }} />
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <img src={tangem_step2} alt="Kaspa Screenshot 2" style={{ width: '100%', height: 'auto' }} />
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <img src={tangem_step3} alt="Kaspa Screenshot 3" style={{ width: '100%', height: 'auto' }} />
+              </Grid>
+            </Grid>
+          )}
+        </Box>
       </Paper>
       <Typography variant="body1" component="p" style={{ color: '#fff', marginTop: 20, textAlign: 'center' }}>
         <strong>Follow me on 𝕏</strong>
