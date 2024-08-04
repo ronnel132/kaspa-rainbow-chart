@@ -85,8 +85,12 @@ function HomePage() {
   const shareTitle = "Check out the Kaspa Rainbow Chart!";
 
   const handleTangemBuyNowClick = () => {
-    logAction('rc_get_a_tangem', { buttonName: 'Buy Now' });
+    logAction('rc_get_a_tangem');
   };
+
+  const handleTangemAmazonBuyNowClick = () => {
+    logAction('rc_amazon_get_a_tangem');
+  }
 
   return (
     <Container
@@ -320,22 +324,29 @@ function HomePage() {
             }}
             onClick={handleTangemBuyNowClick}
           >
-            Get a Tangem Wallet
+            Get a Tangem Wallet (10% off)
           </Button>
-          <Box
+        </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Typography variant="body1" component="p" style={{ color: '#fff', marginTop: 8 }}>
+            <strong>Or</strong>
+          </Typography>
+        </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 1 }}>
+          <Button
+            href="https://amzn.to/3WvjmiY"
+            target="_blank"
+            variant="contained"
             sx={{
-              ml: 1,
-              px: 1.5,
-              py: 0.5,
-              backgroundColor: '#FFD700',
-              borderRadius: '4px',
-              display: 'inline-block',
+              backgroundColor: '#d64242',
+              color: '#fff',
+              '&:hover': { backgroundColor: '#bf3a3a' },
+              textTransform: 'none',
             }}
+            onClick={handleTangemAmazonBuyNowClick}
           >
-            <Typography variant="body2" style={{ fontWeight: 'bold' }}>
-              10% OFF
-            </Typography>
-          </Box>
+            Buy on Amazon
+          </Button>
         </Box>
 
         <Box sx={{ flexGrow: 1, mt: 2 }}>
