@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Typography, Paper, Box, Grid, Button } from '@mui/material';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { LOG_ACTION } from './constants/urls';
 import PriceChart from './Chart';
 import {
   FacebookShareButton,
@@ -21,6 +22,37 @@ import FollowMeOnX from './FollowMeOnX';
 import tangem_step1 from './assets/tangem-step1.png';
 import tangem_step2 from './assets/tangem-step2.png';
 import tangem_step3 from './assets/tangem-step3.png';
+
+function getDeviceType() {
+  const userAgent = navigator.userAgent.toLowerCase();
+  if (/mobile|android|iphone|ipad|tablet|blackberry|opera mini|iemobile|wpdesktop/.test(userAgent)) {
+    return 'mobile';
+  }
+  return 'desktop';
+}
+
+function logAction(clickType) {
+  const deviceType = getDeviceType();
+  const params = new URLSearchParams({
+    click_type: clickType,
+    device_type: deviceType,
+    timestamp: new Date().toISOString()
+  }).toString();
+
+  fetch(`${LOG_ACTION}?${params}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Log success:', data);
+  })
+  .catch((error) => {
+    console.error('Log error:', error);
+  });
+}
 
 function HomePage() {
   document.title = "Kaspa Rainbow Chart";
@@ -51,6 +83,10 @@ function HomePage() {
 
   const shareUrl = "https://kasparainbowchart.com";
   const shareTitle = "Check out the Kaspa Rainbow Chart!";
+
+  const handleTangemBuyNowClick = () => {
+    logAction('rc_get_a_tangem', { buttonName: 'Buy Now' });
+  };
 
   return (
     <Container
@@ -282,8 +318,9 @@ function HomePage() {
               '&:hover': { backgroundColor: '#bf3a3a' },
               textTransform: 'none',
             }}
+            onClick={handleTangemBuyNowClick}
           >
-            Buy Now
+            Get a Tangem Wallet
           </Button>
           <Box
             sx={{
