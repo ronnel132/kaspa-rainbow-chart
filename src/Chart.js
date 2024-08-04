@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -52,6 +52,7 @@ const getSupportPrice = (daysSinceGb) => {
 
 const PriceChart = ({ priceData, isMobile }) => {
   const chartRef = useRef(null);
+  const [scaleType, setScaleType] = useState('logarithmic');
 
   useEffect(() => {
     const chart = chartRef.current;
@@ -61,6 +62,10 @@ const PriceChart = ({ priceData, isMobile }) => {
       };
     }
   }, [chartRef]);
+
+  const toggleScaleType = () => {
+    setScaleType(prevType => prevType === 'logarithmic' ? 'linear' : 'logarithmic');
+  };
 
   const startDate = new Date('2021-11-07');
   const endDate = new Date('2027-01-01');
@@ -197,18 +202,22 @@ const PriceChart = ({ priceData, isMobile }) => {
         }
       },
       y: {
-        type: 'logarithmic',
+        type: scaleType,
         title: {
           display: true,
           text: 'Price',
         },
         ticks: {
           callback: function (value) {
-            const logValue = Math.log10(value);
-            if (Number.isInteger(logValue)) {
+            if (scaleType === 'logarithmic') {
+              const logValue = Math.log10(value);
+              if (Number.isInteger(logValue)) {
+                return value;
+              }
+              return null;
+            } else {
               return value;
             }
-            return null;
           },
         },
         grid: {
@@ -270,8 +279,15 @@ const PriceChart = ({ priceData, isMobile }) => {
   };
 
   return (
-    <div style={{ position: 'relative', height: '80vh', width: '100%' }}>
-      <Line ref={chartRef} data={data} options={options} />
+    <div style={{ position: 'relative', width: '100%' }}>
+      <div style={{ height: '80vh' }}>
+        <Line ref={chartRef} data={data} options={options} />
+      </div>
+      <div style={{ textAlign: 'center', marginTop: '10px', marginBottom: '10px' }}>
+        <button onClick={toggleScaleType} style={{ zIndex: 10 }}>
+          Toggle Y-Axis Scale
+        </button>
+      </div>
     </div>
   );
 };
