@@ -49,6 +49,9 @@ const get25thPrice = (daysSinceGb) => {
 const getSupportPrice = (daysSinceGb) => {
   return parseFloat((Math.pow(10, -13.41344198) * Math.pow(daysSinceGb, 4.218461)).toFixed(7));
 };
+const getRockBottomSupportPrice = (daysSinceGb) => {
+  return parseFloat((Math.pow(10, -13.54846867) * Math.pow(daysSinceGb, 4.218461)).toFixed(7));
+};
 
 const PriceChart = ({ priceData, isMobile }) => {
   const chartRef = useRef(null);
@@ -78,6 +81,7 @@ const PriceChart = ({ priceData, isMobile }) => {
   const resistancePrices = days.map(getResistancePrice);
   const fairPrices = days.map(getFairPrice);
   const supportPrices = days.map(getSupportPrice);
+  const rockBottomSupportPrices = days.map(getRockBottomSupportPrice)
   const prices75th = days.map(get75thPrice);
   const prices25th = days.map(get25thPrice);
 
@@ -106,6 +110,16 @@ const PriceChart = ({ priceData, isMobile }) => {
   const data = {
     labels: dates.map(date => date.getTime()),
     datasets: [
+      {
+        label: 'Rock Bottom Support Price',
+        data: rockBottomSupportPrices,
+        borderColor: '#6f45c4', // Custom color for Support Price
+        backgroundColor: '#6f45c4',
+        fill: false,
+        pointRadius: 0,
+        pointHitRadius: 10, // Increase hit radius for better hover detection
+        borderWidth: 1, // Make line thinner
+      },
       {
         label: 'Support Price',
         data: supportPrices,
