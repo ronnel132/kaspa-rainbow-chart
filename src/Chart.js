@@ -34,24 +34,28 @@ ChartJS.register(
   zoomPlugin
 );
 
-const getResistancePrice = (daysSinceGb) => {
-  return parseFloat((Math.pow(10, -13.10611888) * Math.pow(daysSinceGb, 4.218461)).toFixed(7));
-};
-const get75thPrice = (daysSinceGb) => {
-  return parseFloat((Math.pow(10, -13.19676988) * Math.pow(daysSinceGb, 4.218461)).toFixed(7));
-};
 const getFairPrice = (daysSinceGb) => {
   return parseFloat((Math.pow(10, -13.25978043) * Math.pow(daysSinceGb, 4.218461)).toFixed(7));
 };
-const get25thPrice = (daysSinceGb) => {
-  return parseFloat((Math.pow(10, -13.32279099) * Math.pow(daysSinceGb, 4.218461)).toFixed(7));
-};
-const getSupportPrice = (daysSinceGb) => {
-  return parseFloat((Math.pow(10, -13.41344198) * Math.pow(daysSinceGb, 4.218461)).toFixed(7));
-};
-const getRockBottomSupportPrice = (daysSinceGb) => {
-  return parseFloat((Math.pow(10, -13.54846867) * Math.pow(daysSinceGb, 4.218461)).toFixed(7));
-};
+
+const getBand1Price = (daysSinceGb) => {
+  return parseFloat((Math.pow(10, -13.60720943) * Math.pow(daysSinceGb, 4.218461)).toFixed(7));
+}
+const getBand2Price = (daysSinceGb) => {
+  return parseFloat((Math.pow(10, -13.49139976) * Math.pow(daysSinceGb, 4.218461)).toFixed(7));
+}
+const getBand3Price = (daysSinceGb) => {
+  return parseFloat((Math.pow(10, -13.37559010) * Math.pow(daysSinceGb, 4.218461)).toFixed(7));
+}
+const getBand4Price = (daysSinceGb) => {
+  return parseFloat((Math.pow(10, -13.14397077) * Math.pow(daysSinceGb, 4.218461)).toFixed(7));
+}
+const getBand5Price = (daysSinceGb) => {
+  return parseFloat((Math.pow(10, -13.02816110) * Math.pow(daysSinceGb, 4.218461)).toFixed(7));
+}
+const getBand6Price = (daysSinceGb) => {
+  return parseFloat((Math.pow(10, -12.91235144) * Math.pow(daysSinceGb, 4.218461)).toFixed(7));
+}
 
 const PriceChart = ({ priceData, isMobile }) => {
   const chartRef = useRef(null);
@@ -71,19 +75,20 @@ const PriceChart = ({ priceData, isMobile }) => {
   };
 
   const startDate = new Date('2021-11-07');
-  const endDate = new Date('2027-01-01');
+  const endDate = new Date('2026-01-01');
   const days = Array.from({ length: 3650 - 100 + 1 }, (_, i) => i + 100); // Example for 100 to 3650 days
   const dates = days.map(day => {
     const date = new Date(startDate);
     date.setDate(startDate.getDate() + day);
     return date;
   });
-  const resistancePrices = days.map(getResistancePrice);
+  const band1Prices = days.map(getBand1Price);
+  const band2Prices = days.map(getBand2Price);
+  const band3Prices = days.map(getBand3Price);
   const fairPrices = days.map(getFairPrice);
-  const supportPrices = days.map(getSupportPrice);
-  const rockBottomSupportPrices = days.map(getRockBottomSupportPrice)
-  const prices75th = days.map(get75thPrice);
-  const prices25th = days.map(get25thPrice);
+  const band4Prices = days.map(getBand4Price);
+  const band5Prices = days.map(getBand5Price);
+  const band6Prices = days.map(getBand6Price);
 
   const annotations = dates
     .filter(date => date.getDate() === startDate.getDate() && date.getMonth() === startDate.getMonth()) // Filter for the same day and month each year
@@ -111,30 +116,30 @@ const PriceChart = ({ priceData, isMobile }) => {
     labels: dates.map(date => date.getTime()),
     datasets: [
       {
-        label: 'Rock Bottom Support Price',
-        data: rockBottomSupportPrices,
-        borderColor: '#6f45c4', // Custom color for Support Price
-        backgroundColor: '#6f45c4',
+        label: 'Kaspa is Dead',
+        data: band1Prices,
+        borderColor: '#D27FFF', // Custom color for Support Price
+        backgroundColor: '#D27FFF',
         fill: false,
         pointRadius: 0,
         pointHitRadius: 10, // Increase hit radius for better hover detection
         borderWidth: 1, // Make line thinner
       },
       {
-        label: 'Support Price',
-        data: supportPrices,
-        borderColor: '#4573C4', // Custom color for Support Price
-        backgroundColor: '#4573C4',
+        label: 'Buy!',
+        data: band2Prices,
+        borderColor: '#7F7FFF', // Custom color for Support Price
+        backgroundColor: '#7F7FFF',
         fill: false,
         pointRadius: 0,
         pointHitRadius: 10, // Increase hit radius for better hover detection
         borderWidth: 1, // Make line thinner
       },
       {
-        label: '25th Percentile Price',
-        data: prices25th,
-        borderColor: '#62BF7B', // Custom color for 25th Percentile Price
-        backgroundColor: '#62BF7B',
+        label: 'Still Cheap',
+        data: band3Prices,
+        borderColor: '#7FB2FF', // Custom color for 25th Percentile Price
+        backgroundColor: '#7FB2FF',
         fill: false,
         pointRadius: 0,
         pointHitRadius: 10,
@@ -143,28 +148,38 @@ const PriceChart = ({ priceData, isMobile }) => {
       {
         label: 'Fair Price',
         data: fairPrices,
-        borderColor: '#FFEB84', // Custom color for Fair Price
-        backgroundColor: '#FFEB84',
+        borderColor: '#7FFF7F', // Custom color for Fair Price
+        backgroundColor: '#7FFF7F',
         fill: false, // Disable fill
         pointRadius: 0,
         pointHitRadius: 10, // Increase hit radius for better hover detection
         borderWidth: 1, // Make line thinner
       },
       {
-        label: '75th Percentile Price',
-        data: prices75th,
-        borderColor: '#EC7C31', // Custom color for 75th Percentile Price
-        backgroundColor: '#EC7C31',
+        label: 'Getting Warmer',
+        data: band4Prices,
+        borderColor: '#FFF27F', // Custom color for 75th Percentile Price
+        backgroundColor: '#FFF27F',
         fill: false,
         pointRadius: 0,
         pointHitRadius: 10,
         borderWidth: 1,
       },
       {
-        label: 'Resistance Price',
-        data: resistancePrices,
-        borderColor: '#C10000', // Custom color for Resistance Price
-        backgroundColor: '#C10000',
+        label: 'Expensive',
+        data: band5Prices,
+        borderColor: '#FFB27F', // Custom color for Resistance Price
+        backgroundColor: '#FFB27F',
+        fill: false,
+        pointRadius: 0,
+        pointHitRadius: 10, // Increase hit radius for better hover detection
+        borderWidth: 1, // Make line thinner
+      },
+      {
+        label: 'Sell Now!',
+        data: band6Prices,
+        borderColor: '#FF7F7F', // Custom color for Resistance Price
+        backgroundColor: '#FF7F7F',
         fill: false,
         pointRadius: 0,
         pointHitRadius: 10, // Increase hit radius for better hover detection
