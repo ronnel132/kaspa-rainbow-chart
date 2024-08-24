@@ -67,8 +67,30 @@ const PriceChart = ({ priceData, isMobile }) => {
       chart.canvas.ondblclick = () => {
         chart.resetZoom();
       };
+      // Register the custom plugin
+      const width = chart.width;
+      const watermarkPositionX = isMobile ? width / 1.7: width - (width / 4);
+      const watermarkPlugin = {
+        id: 'watermark',
+        beforeDraw: (chart) => {
+          const ctx = chart.ctx;
+          const height = chart.height;
+          const text = 'KaspaRainbowChart.com';
+
+          ctx.save();
+          ctx.font = isMobile ? 'bold 20px sans-serif' : 'bold 30px sans-serif';
+          ctx.fillStyle = 'rgba(200, 200, 200, 0.5)'; // Light gray color with transparency
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.translate(watermarkPositionX, height - (height / 4));
+          // ctx.rotate(-Math.PI / 4); // Rotate the text
+          ctx.fillText(text, 0, 0);
+          ctx.restore();
+        }
+      };
+      ChartJS.register(watermarkPlugin);
     }
-  }, [chartRef]);
+  }, [chartRef, isMobile]);
 
   const toggleScaleType = () => {
     setScaleType(prevType => prevType === 'logarithmic' ? 'linear' : 'logarithmic');
@@ -219,6 +241,7 @@ const PriceChart = ({ priceData, isMobile }) => {
           text: 'Date',
         },
         ticks: {
+          color: '#CCCCCC', // Lighter label color for the x-axis
           callback: function (value) {
             const date = new Date(value);
             return format(date, 'yyyy-MM-dd'); // Format the date to ensure it's displayed correctly
@@ -237,6 +260,7 @@ const PriceChart = ({ priceData, isMobile }) => {
           text: 'Price',
         },
         ticks: {
+          color: '#CCCCCC', // Lighter label color for the y-axis
           callback: function (value) {
             if (scaleType === 'logarithmic') {
               const logValue = Math.log10(value);
@@ -304,6 +328,11 @@ const PriceChart = ({ priceData, isMobile }) => {
           }
         }
       },
+      legend: {
+        labels: {
+          color: '#CCCCCC', // Lighter label color for the legend
+        }
+      }
     },
   };
 
