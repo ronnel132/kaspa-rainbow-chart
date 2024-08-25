@@ -20,7 +20,7 @@ const SMACrossOverFAQ = ({ isMobile, handleTangemBuyNowClick, handleTangemAmazon
         <strong>1) What is the Kaspa SMA Crossover Chart?</strong>
       </Typography>
       <Typography variant="body2" component="p" style={{ color: '#ccc' }}>
-        The SMA Crossover Chart is based on the observation that whenever the 85 day Simple Moving Average (SMA) cross over the 66 day SMA, Kaspa price tends
+        The Kaspa SMA Crossover Chart is based on the observation that whenever the 85 day Simple Moving Average (SMA) cross over the 66 day SMA, Kaspa price tends
         to surge up shortly after.
       </Typography>
       <Typography variant="body1" component="p" style={{ color: '#fff', marginTop: 20 }}>
@@ -50,14 +50,14 @@ const SMACrossOverFAQ = ({ isMobile, handleTangemBuyNowClick, handleTangemAmazon
       </Typography>
       <Typography variant="body2" component="p" style={{ color: '#ccc' }}>
         This chart should be used to predict when Kaspa is nearing a parabolic price move. Although Kaspa is relatively early in its life, and past cannot always predict future, the SMA Crossover Chart
-        displays emerging proper
+        has been highly accurate for predicting past parabolic price moves up.
       </Typography>
       <Typography variant="body1" component="p" style={{ color: '#fff', marginTop: 20 }}>
         <strong>5) How reliable is this?</strong>
       </Typography>
       <Typography variant="body2" component="p" style={{ color: '#ccc' }}>
-        Kaspa is still a relatively new project, so it's unclear if this pattern will always hold, but so far, it has correctly predicted all 5 of the last major price increases. The pattern may change
-        over time, and I'll keep an eye on future crossover events to see how it develops.
+        Kaspa is still a relatively new project, so it's unclear if this pattern will always hold. But so far, it has correctly predicted all 5 of the last major price increases. The pattern may change
+        over time, and I'll keep an eye on future crossover events to see how accurate the predictive correlation holds.
       </Typography>
       <Typography variant="body1" component="p" style={{ color: '#fff', marginTop: 20 }}>
         <strong>6) Where can I learn more about Kaspa?</strong>
