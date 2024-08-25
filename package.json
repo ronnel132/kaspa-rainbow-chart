@@ -28,6 +28,7 @@
     "start-dev": "cross-env NODE_ENV=development react-scripts start",
     "start-prod": "cross-env NODE_ENV=production react-scripts start",
     "build": "react-scripts build",
+    "build-obfuscated": "react-scripts build && javascript-obfuscator build/static/js --output build-obfuscated/static/js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -50,6 +51,7 @@
     ]
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "javascript-obfuscator": "^4.1.1"
   }
 }
