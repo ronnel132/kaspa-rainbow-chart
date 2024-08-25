@@ -17,7 +17,7 @@ const SMACrossOverFAQ = ({ isMobile, handleTangemBuyNowClick, handleTangemAmazon
       }}
     >
       <Typography variant="body1" component="p" style={{ color: '#fff' }}>
-        <strong>1) What is the SMA Crossover Chart?</strong>
+        <strong>1) What is the Kaspa SMA Crossover Chart?</strong>
       </Typography>
       <Typography variant="body2" component="p" style={{ color: '#ccc' }}>
         The SMA Crossover Chart is based on the observation that whenever the 85 day Simple Moving Average (SMA) cross over the 66 day SMA, Kaspa price tends
