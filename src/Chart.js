@@ -331,7 +331,8 @@ const PriceChart = ({ priceData, isMobile }) => {
       legend: {
         labels: {
           color: '#CCCCCC', // Lighter label color for the legend
-        }
+        },
+        onClick: null, // Disables the legend's click functionality
       }
     },
   };

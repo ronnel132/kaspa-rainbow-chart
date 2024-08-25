@@ -193,6 +193,7 @@ const SMAChart = ({ priceData, isMobile }) => {
         labels: {
           color: '#CCCCCC',
         },
+        onClick: null, // Disables the legend's click functionality
       },
     },
   };
