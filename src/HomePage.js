@@ -53,12 +53,23 @@ function logAction(eventType) {
   });
 }
 
+function getChartParam() {
+  const params = new URLSearchParams(window.location.search);
+  const chartParam = params.get('chart');
+
+  if (chartParam === 'sma') {
+    return 'sma';
+  } else {
+    return 'powerLaw';
+  }
+}
+
 function HomePage() {
   document.title = "Kaspa Rainbow Chart";
 
   const hasLoggedVisit = useRef(false);
   const [priceData, setPriceData] = useState({});
-  const [selectedChart, setSelectedChart] = useState('powerLaw'); // State for toggling charts
+  const [selectedChart, setSelectedChart] = useState(getChartParam()); // State for toggling charts
 
   useEffect(() => {
     if (!hasLoggedVisit.current) {

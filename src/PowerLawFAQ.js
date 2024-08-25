@@ -109,7 +109,8 @@ const PowerLawFAQ = ({ isMobile, handleTangemBuyNowClick, handleTangemAmazonBuyN
       </Typography>
       <Typography variant="body2" component="p" style={{ color: '#ccc' }}>
         I use the Tangem wallet (<a style={{ color: 'white' }} href="https://tangem.com/en/?promocode=KE8DCR">https://tangem.com</a>) to exchange BTC to KAS through the integrated swap.
-        I prefer Tangem for its ease of use, cold storage (keep your Kaspa off exchanges!) and backup cards.
+        I prefer Tangem for its ease of use, cold storage (keep your Kaspa off exchanges!) and backup cards. The affiliate links below give me a small percentage which I use to support
+        this website. If you like my work, and need a cold storage solution, consider getting a Tangem wallet through the links below.
       </Typography>
       <Typography variant="body2" component="p" style={{ color: '#ccc', marginTop: '30px' }}>
         <b style={{ color: '#d64242' }}>Step 1)</b> Transfer Bitcoin to your Tangem wallet address.
