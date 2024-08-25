@@ -42,8 +42,30 @@ const SMAChart = ({ priceData, isMobile }) => {
       chart.canvas.ondblclick = () => {
         chart.resetZoom();
       };
+      // Register the custom plugin
+      const width = chart.width;
+      const watermarkPositionX = isMobile ? width / 1.7: width - (width / 4);
+      const watermarkPlugin = {
+        id: 'watermark',
+        beforeDraw: (chart) => {
+          const ctx = chart.ctx;
+          const height = chart.height;
+          const text = 'KaspaRainbowChart.com';
+
+          ctx.save();
+          ctx.font = isMobile ? 'bold 20px sans-serif' : 'bold 30px sans-serif';
+          ctx.fillStyle = 'rgba(200, 200, 200, 0.5)'; // Light gray color with transparency
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.translate(watermarkPositionX, height - (height / 4));
+          // ctx.rotate(-Math.PI / 4); // Rotate the text
+          ctx.fillText(text, 0, 0);
+          ctx.restore();
+        }
+      };
+      ChartJS.register(watermarkPlugin);
     }
-  }, [chartRef]);
+  }, [chartRef, isMobile]);
 
   // Ensure priceData is an array
   if (!Array.isArray(priceData)) {
