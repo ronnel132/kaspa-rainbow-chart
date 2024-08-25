@@ -38,15 +38,9 @@ const SMAChart = ({ priceData, isMobile }) => {
   useEffect(() => {
     const chart = chartRef.current;
     if (chart) {
-      const handleDoubleClick = () => {
+      const chart = chartRef.current;
+      chart.canvas.ondblclick = () => {
         chart.resetZoom();
-      };
-      const canvas = chart.canvas;
-
-      canvas.addEventListener('dblclick', handleDoubleClick);
-
-      return () => {
-        canvas.removeEventListener('dblclick', handleDoubleClick);
       };
     }
   }, [chartRef]);
@@ -74,19 +68,20 @@ const SMAChart = ({ priceData, isMobile }) => {
   };
 
   // Calculate SMAs
-  const sma70 = calculateSMA(priceData, 66);
-  const sma89 = calculateSMA(priceData, 85);
+  const sma66 = calculateSMA(priceData, 66);
+  const sma85 = calculateSMA(priceData, 85);
 
   // Identify crossovers
   const annotations = [];
   for (let i = 1; i < priceData.length; i++) {
-    if (sma89[i] > sma70[i] && sma89[i - 1] <= sma70[i - 1]) {
+    if (sma85[i] > sma66[i] && sma85[i - 1] <= sma66[i - 1]) {
       annotations.push({
         type: 'line',
         xMin: priceData[i].date,
         xMax: priceData[i].date,
         borderColor: 'red',
-        borderWidth: 2,
+        borderWidth: 1,
+        borderDash: [5, 5],
         label: {
           enabled: true,
           content: 'Crossover',
@@ -111,24 +106,27 @@ const SMAChart = ({ priceData, isMobile }) => {
         fill: false,
         pointRadius: 0,
         borderWidth: 1,
+        pointHitRadius: 10, // Increase hit radius for better hover detection
       },
       {
-        label: '70-Day Moving Average',
-        data: sma70,
+        label: '66-Day Moving Average',
+        data: sma66,
         borderColor: 'green',
         backgroundColor: 'green',
         fill: false,
         pointRadius: 0,
         borderWidth: 1,
+        pointHitRadius: 10, // Increase hit radius for better hover detection
       },
       {
-        label: '89-Day Moving Average',
-        data: sma89,
+        label: '85-Day Moving Average',
+        data: sma85,
         borderColor: 'orange',
         backgroundColor: 'orange',
         fill: false,
         pointRadius: 0,
         borderWidth: 1,
+        pointHitRadius: 10, // Increase hit radius for better hover detection
       },
     ],
   };
