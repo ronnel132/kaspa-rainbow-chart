@@ -186,7 +186,7 @@ function HomePage() {
             align="center"
             style={{ color: '#ccc', marginBottom: '15px' }}
           >
-            Crossover of the 85 over 66 daily Simple Moving Average.
+            Crossover of the 85 and 66 day simple moving average.
           </Typography>
           <SMAChart priceData={priceData} isMobile={isMobileDeviceWithTouch()} />
         </>
