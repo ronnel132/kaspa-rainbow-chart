@@ -109,7 +109,7 @@ const SMAChart = ({ priceData, isMobile }) => {
         pointHitRadius: 10, // Increase hit radius for better hover detection
       },
       {
-        label: '66-Day Moving Average',
+        label: '66DMA',
         data: sma66,
         borderColor: 'green',
         backgroundColor: 'green',
@@ -119,7 +119,7 @@ const SMAChart = ({ priceData, isMobile }) => {
         pointHitRadius: 10, // Increase hit radius for better hover detection
       },
       {
-        label: '85-Day Moving Average',
+        label: '85DMA',
         data: sma85,
         borderColor: 'orange',
         backgroundColor: 'orange',
@@ -192,6 +192,9 @@ const SMAChart = ({ priceData, isMobile }) => {
       legend: {
         labels: {
           color: '#CCCCCC',
+          font: {
+            size: 16,
+          },
         },
         onClick: null, // Disables the legend's click functionality
       },
