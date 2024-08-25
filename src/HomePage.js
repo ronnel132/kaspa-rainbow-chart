@@ -123,15 +123,31 @@ function HomePage() {
       <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
         <Button
           variant={selectedChart === 'powerLaw' ? 'contained' : 'outlined'}
-          color="primary"
+          sx={{
+            marginRight: 2,
+            color: selectedChart === 'powerLaw' ? '#fff' : '#d64242',
+            backgroundColor: selectedChart === 'powerLaw' ? '#d64242' : 'transparent',
+            borderColor: '#d64242',
+            '&:hover': {
+              backgroundColor: selectedChart === 'powerLaw' ? '#d64242' : 'rgba(214, 66, 66, 0.04)',
+              borderColor: '#d64242',
+            },
+          }}
           onClick={() => setSelectedChart('powerLaw')}
-          sx={{ marginRight: 2 }}
         >
           Power Law Chart
         </Button>
         <Button
           variant={selectedChart === 'sma' ? 'contained' : 'outlined'}
-          color="primary"
+          sx={{
+            color: selectedChart === 'sma' ? '#fff' : '#d64242',
+            backgroundColor: selectedChart === 'sma' ? '#d64242' : 'transparent',
+            borderColor: '#d64242',
+            '&:hover': {
+              backgroundColor: selectedChart === 'sma' ? '#d64242' : 'rgba(214, 66, 66, 0.04)',
+              borderColor: '#d64242',
+            },
+          }}
           onClick={() => setSelectedChart('sma')}
         >
           SMA Chart
