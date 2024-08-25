@@ -79,8 +79,8 @@ const SMAChart = ({ priceData, isMobile }) => {
         type: 'line',
         xMin: priceData[i].date,
         xMax: priceData[i].date,
-        borderColor: 'red',
-        borderWidth: 1,
+        borderColor: '#fa4141',
+        borderWidth: 2,
         borderDash: [5, 5],
         label: {
           enabled: true,
