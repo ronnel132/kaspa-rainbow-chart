@@ -28,7 +28,9 @@
     "start-dev": "cross-env NODE_ENV=development react-scripts start",
     "start-prod": "cross-env NODE_ENV=production react-scripts start",
     "build": "react-scripts build",
-    "build-obfuscated": "react-scripts build && javascript-obfuscator build/static/js --output build-obfuscated/static/js",
+    "build-obfuscated": "react-scripts build && npm run copy-assets && npm run uglify",
+    "copy-assets": "copyfiles -u 1 build/** build-obfuscated",
+    "uglify": "uglifyjs build-obfuscated/static/js/*.js --compress --mangle --output build-obfuscated/static/js/app.min.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -51,7 +53,9 @@
     ]
   },
   "devDependencies": {
+    "copyfiles": "^2.4.1",
+    "cpx": "^1.5.0",
     "cross-env": "^7.0.3",
-    "javascript-obfuscator": "^4.1.1"
+    "uglify-js": "^3.19.2"
   }
 }
