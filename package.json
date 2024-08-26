@@ -34,7 +34,7 @@
     "build-obfuscated": "react-scripts build && npm run copy-assets && npm run prepare-dir && npm run uglify",
     "copy-assets": "copyfiles -u 1 build/** build-obfuscated",
     "prepare-dir": "mkdir -p build-obfuscated/static/js",
-    "uglify": "uglifyjs build-obfuscated/static/js/*.js --compress --mangle --output build-obfuscated/static/js/app.min.js",
+    "uglify": "uglifyjs build/static/js/*.js --compress --mangle --output build-obfuscated/static/js/app.min.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
