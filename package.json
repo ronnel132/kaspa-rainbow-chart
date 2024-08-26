@@ -32,7 +32,7 @@
     "start-prod": "cross-env NODE_ENV=production react-scripts start",
     "build": "react-scripts build",
     "build-obfuscated": "GENERATE_SOURCEMAP=false react-scripts build && npm run prepare-dir && npm run copy-assets && npm run uglify && node update-asset-manifest.js",
-    "copy-assets": "cpx 'build/**/*' build-obfuscated",
+    "copy-assets": "cpx 'build/**/!(js)' build-obfuscated",
     "prepare-dir": "mkdir -p build-obfuscated/static/js",
     "uglify": "uglifyjs build/static/js/*.js --compress --mangle --output build-obfuscated/static/js/app.min.js",
     "test": "react-scripts test",
