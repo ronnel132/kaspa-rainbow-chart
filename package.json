@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.16.4",
@@ -15,7 +14,6 @@
     "chartjs-adapter-date-fns": "^3.0.0",
     "chartjs-plugin-annotation": "^3.0.1",
     "chartjs-plugin-zoom": "^2.0.1",
-    "cpx": "^1.5.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-copy-to-clipboard": "^5.1.0",
@@ -24,15 +22,12 @@
     "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
     "react-share": "^5.1.0",
-    "uglify-js": "^3.19.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start-dev": "cross-env NODE_ENV=development react-scripts start",
     "start-prod": "cross-env NODE_ENV=production react-scripts start",
-    "build": "react-scripts build",
-    "build-obfuscated": "GENERATE_SOURCEMAP=false react-scripts build && ./copy-assets.sh && npm run uglify && node update-asset-manifest.js",
-    "uglify": "uglifyjs build/static/js/*.js --compress --mangle --output build-obfuscated/static/js/app.min.js",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
