@@ -24,6 +24,7 @@
     "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
     "react-share": "^5.1.0",
+    "uglify-js": "^3.19.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -56,6 +57,5 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "uglify-js": "^3.19.2"
   }
 }
