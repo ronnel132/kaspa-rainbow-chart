@@ -50,27 +50,28 @@ const PriceChart = ({ priceData, powerLawData, isMobile }) => {
       chart.canvas.ondblclick = () => {
         chart.resetZoom();
       };
+      // Register the custom plugin
       const watermarkPlugin = {
         id: 'watermark',
         beforeDraw: (chart) => {
           const ctx = chart.ctx;
-          const width = chart.width;
-          const height = chart.height;
+          const { width, height } = chart;
           const text = 'KaspaRainbowChart.com';
           const watermarkPositionX = isMobile ? width / 1.7 : width - (width / 4);
+
           ctx.save();
           ctx.font = isMobile ? 'bold 20px sans-serif' : 'bold 30px sans-serif';
-          ctx.fillStyle = 'rgba(200, 200, 200, 0.5)';
+          ctx.fillStyle = 'rgba(200, 200, 200, 0.5)'; // Light gray color with transparency
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
           ctx.translate(watermarkPositionX, height - (height / 4));
           ctx.fillText(text, 0, 0);
           ctx.restore();
-        },
+        }
       };
       ChartJS.register(watermarkPlugin);
     }
-  }, [chartRef, isMobile]);
+  }, [chartRef, powerLawData, isMobile]);
 
   useEffect(() => {
     if (!_.isEmpty(powerLawData) && !_.isEmpty(priceData)) {
