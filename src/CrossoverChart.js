@@ -15,6 +15,7 @@ import {
 import 'chartjs-adapter-date-fns';
 import annotationPlugin from 'chartjs-plugin-annotation';
 import zoomPlugin from 'chartjs-plugin-zoom';
+import { parseISO } from 'date-fns';
 
 // Register necessary components
 ChartJS.register(
@@ -31,14 +32,13 @@ ChartJS.register(
   zoomPlugin
 );
 
-const SMAChart = ({ priceData, isMobile }) => {
+const SMAChart = ({ priceData, isMobile, kasPrice }) => {
   const chartRef = useRef(null);
 
   // Hook to handle double-click event
   useEffect(() => {
     const chart = chartRef.current;
     if (chart) {
-      const chart = chartRef.current;
       chart.canvas.ondblclick = () => {
         chart.resetZoom();
       };
@@ -117,12 +117,26 @@ const SMAChart = ({ priceData, isMobile }) => {
 
   const latestDate = priceData[priceData.length - 1].date; // Get the latest date in the data
 
+  const today = new Date().setHours(0, 0, 0, 0);
+  const priceDataPoints = priceData.map((item) => {
+    const itemDate = parseISO(item.date).getTime();
+    if (itemDate === today && kasPrice !== null) {
+      return { x: itemDate, y: kasPrice };
+    }
+    return { x: itemDate, y: item.price };
+  });
+
+  // Add current price if it's not already in the data
+  if (kasPrice !== null && !priceDataPoints.some(point => point.x === today)) {
+    priceDataPoints.push({ x: today, y: kasPrice });
+  }
+
   const data = {
     labels: priceData.map((item) => item.date),
     datasets: [
       {
         label: 'Price Data',
-        data: priceData.map((item) => item.price),
+        data: priceDataPoints,
         borderColor: 'white', // Change price line to white
         backgroundColor: 'white',
         fill: false,
@@ -210,6 +224,19 @@ const SMAChart = ({ priceData, isMobile }) => {
       tooltip: {
         mode: 'nearest',
         intersect: true,
+        callbacks: {
+          label: function (context) {
+            const index = context.dataIndex;
+            const datasetLabel = context.dataset.label;
+            const value = context.dataset.data[index];
+            const priceDataPoint = priceDataPoints.find((p) => p.x === context.parsed.x);
+
+            if (datasetLabel === 'Price Data' && priceDataPoint) {
+              return `${datasetLabel}: ${priceDataPoint.y}`;
+            }
+            return `${datasetLabel}: ${value}`;
+          },
+        },
       },
       legend: {
         labels: {

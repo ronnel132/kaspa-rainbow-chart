@@ -211,7 +211,7 @@ function HomePage() {
           >
             Crossover of the 85 and 66 day simple moving average.
           </Typography>
-          <SMAChart priceData={priceData} isMobile={isMobileDeviceWithTouch()} />
+          <SMAChart priceData={priceData} kasPrice={kasPrice} isMobile={isMobileDeviceWithTouch()} />
         </>
       )}
       <Typography
