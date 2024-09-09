@@ -193,7 +193,12 @@ function HomePage() {
           >
             Price according to the power law
           </Typography>
-          <PriceChart priceData={priceData} kasPrice={kasPrice} powerLawData={powerLawData} isMobile={isMobileDeviceWithTouch()} />
+          <PriceChart
+            priceData={priceData}
+            kasPrice={kasPrice}
+            powerLawData={powerLawData}
+            isMobile={isMobileDeviceWithTouch()}
+          />
         </>
       ) : (
         <>

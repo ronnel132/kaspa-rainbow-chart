@@ -40,7 +40,7 @@ const calculatePrice = (daysSinceGb, slope, intercept) => {
   return parseFloat((Math.pow(10, intercept) * Math.pow(daysSinceGb, slope)).toFixed(7));
 };
 
-const PriceChart = ({ priceData, powerLawData, isMobile }) => {
+const PriceChart = ({ priceData, powerLawData, isMobile, kasPrice }) => {
   const chartRef = useRef(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -122,10 +122,19 @@ const PriceChart = ({ priceData, powerLawData, isMobile }) => {
   const band5Prices = days.map(getBand5Price);
   const band6Prices = days.map(getBand6Price);
 
-  const priceDataPoints = priceData.map((item) => ({
-    x: parseISO(item.date).getTime(),
-    y: item.price,
-  }));
+  const today = new Date().setHours(0, 0, 0, 0);
+  const priceDataPoints = priceData.map((item) => {
+    const itemDate = parseISO(item.date).getTime();
+    if (itemDate === today && kasPrice !== null) {
+      return { x: itemDate, y: kasPrice };
+    }
+    return { x: itemDate, y: item.price };
+  });
+
+  // Add current price if it's not already in the data
+  if (kasPrice !== null && !priceDataPoints.some(point => point.x === today)) {
+    priceDataPoints.push({ x: today, y: kasPrice });
+  }
 
   const data = {
     labels: dates.map((date) => date.getTime()),
