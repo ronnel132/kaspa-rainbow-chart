@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Container, Typography, Box, Grid, Button } from '@mui/material';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { LOG_ACTION } from './constants/urls';
+import { LOG_ACTION, GET_KAS_PRICE, GET_POWER_LAW } from './constants/urls';
 import PriceChart from './Chart';
 import SMAChart from './CrossoverChart';
 import SMACrossOverFAQ from './SMACrossOverFAQ';
@@ -70,6 +70,8 @@ function HomePage() {
   const hasLoggedVisit = useRef(false);
   const [priceData, setPriceData] = useState({});
   const [selectedChart, setSelectedChart] = useState(getChartParam()); // State for toggling charts
+  const [kasPrice, setKasPrice] = useState(null);
+  const [powerLawData, setPowerLawData] = useState(null);
 
   useEffect(() => {
     if (!hasLoggedVisit.current) {
@@ -91,6 +93,22 @@ function HomePage() {
         setPriceData(transformedData);
       })
       .catch((error) => console.error('Error fetching the prices data:', error));
+
+    // Fetch KAS price
+    fetch(GET_KAS_PRICE)
+      .then(response => response.json())
+      .then(data => {
+        setKasPrice(data.price);
+      })
+      .catch(error => console.error('Error fetching KAS price:', error));
+
+    // Fetch Power Law data
+    fetch(GET_POWER_LAW)
+      .then(response => response.json())
+      .then(data => {
+        setPowerLawData(data);
+      })
+      .catch(error => console.error('Error fetching Power Law data:', error));
   }, []);
 
   const isMobileDeviceWithTouch = () => {
@@ -175,7 +193,7 @@ function HomePage() {
           >
             Price according to the power law
           </Typography>
-          <PriceChart priceData={priceData} isMobile={isMobileDeviceWithTouch()} />
+          <PriceChart priceData={priceData} kasPrice={kasPrice} powerLawData={powerLawData} isMobile={isMobileDeviceWithTouch()} />
         </>
       ) : (
         <>
