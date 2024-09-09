@@ -53,7 +53,7 @@ const PriceChart = ({ priceData, powerLawData, isMobile, kasPrice }) => {
       // Register the custom plugin
       const watermarkPlugin = {
         id: 'watermark',
-        beforeDraw: (chart) => {
+        afterDraw: (chart) => {
           const ctx = chart.ctx;
           const { width, height } = chart;
           const text = 'KaspaRainbowChart.com';
@@ -71,7 +71,7 @@ const PriceChart = ({ priceData, powerLawData, isMobile, kasPrice }) => {
       };
       ChartJS.register(watermarkPlugin);
     }
-  }, [chartRef, powerLawData, isMobile]);
+  }, [chartRef, kasPrice, powerLawData, isMobile]);
 
   useEffect(() => {
     if (!_.isEmpty(powerLawData) && !_.isEmpty(priceData)) {
