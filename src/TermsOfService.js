@@ -144,7 +144,7 @@ const TermsOfService = () => {
       <Typography variant="body1" paragraph>
         If you have any questions about these Terms and Conditions, You can contact us:
       </Typography>
-      <Typography variant="body1">Via X: https://x.com/xetur132</Typography>
+      <Typography variant="body1">Via X: https://x.com/xetur_xyz</Typography>
     </Box>
   );
 };
