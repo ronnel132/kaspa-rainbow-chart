@@ -3,8 +3,6 @@ import { Container, Typography, Box, Grid, Button } from '@mui/material';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { LOG_ACTION, GET_KAS_PRICE, GET_POWER_LAW } from './constants/urls';
 import PriceChart from './Chart';
-import SMAChart from './CrossoverChart';
-import SMACrossOverFAQ from './SMACrossOverFAQ';
 import PowerLawFAQ from './PowerLawFAQ';
 import {
   FacebookShareButton,
@@ -53,23 +51,11 @@ function logAction(eventType) {
   });
 }
 
-function getChartParam() {
-  const params = new URLSearchParams(window.location.search);
-  const chartParam = params.get('chart');
-
-  if (chartParam === 'sma') {
-    return 'sma';
-  } else {
-    return 'powerLaw';
-  }
-}
-
 function HomePage() {
   document.title = "Kaspa Rainbow Chart";
 
   const hasLoggedVisit = useRef(false);
   const [priceData, setPriceData] = useState({});
-  const [selectedChart, setSelectedChart] = useState(getChartParam()); // State for toggling charts
   const [kasPrice, setKasPrice] = useState(null);
   const [powerLawData, setPowerLawData] = useState(null);
 
@@ -147,73 +133,23 @@ function HomePage() {
         align="center"
         style={{ color: '#fff', fontWeight: 'bolder' }}
       >
-        { selectedChart === "powerLaw" ? 'Kaspa Rainbow Chart' : 'Kaspa SMA Crossover Chart' }
+        Kaspa Rainbow Chart
       </Typography>
-      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-        <Button
-          variant={selectedChart === 'powerLaw' ? 'contained' : 'outlined'}
-          sx={{
-            marginRight: 2,
-            color: selectedChart === 'powerLaw' ? '#fff' : '#d64242',
-            backgroundColor: selectedChart === 'powerLaw' ? '#d64242' : 'transparent',
-            borderColor: '#d64242',
-            '&:hover': {
-              backgroundColor: selectedChart === 'powerLaw' ? '#d64242' : 'rgba(214, 66, 66, 0.04)',
-              borderColor: '#d64242',
-            },
-          }}
-          onClick={() => setSelectedChart('powerLaw')}
-        >
-          Power Law Chart
-        </Button>
-        <Button
-          variant={selectedChart === 'sma' ? 'contained' : 'outlined'}
-          sx={{
-            color: selectedChart === 'sma' ? '#fff' : '#d64242',
-            backgroundColor: selectedChart === 'sma' ? '#d64242' : 'transparent',
-            borderColor: '#d64242',
-            '&:hover': {
-              backgroundColor: selectedChart === 'sma' ? '#d64242' : 'rgba(214, 66, 66, 0.04)',
-              borderColor: '#d64242',
-            },
-          }}
-          onClick={() => setSelectedChart('sma')}
-        >
-          SMA Chart
-        </Button>
-      </Box>
-      {selectedChart === 'powerLaw' ? (
-        <>
-          <Typography
-            variant="h6"
-            component="h2"
-            gutterBottom
-            align="center"
-            style={{ color: '#ccc', marginBottom: '15px' }}
-          >
-            Price according to the power law
-          </Typography>
-          <PriceChart
-            priceData={priceData}
-            kasPrice={kasPrice}
-            powerLawData={powerLawData}
-            isMobile={isMobileDeviceWithTouch()}
-          />
-        </>
-      ) : (
-        <>
-          <Typography
-            variant="h6"
-            component="h2"
-            gutterBottom
-            align="center"
-            style={{ color: '#ccc', marginBottom: '15px' }}
-          >
-            Crossover of the 85 and 66 day simple moving average.
-          </Typography>
-          <SMAChart priceData={priceData} kasPrice={kasPrice} isMobile={isMobileDeviceWithTouch()} />
-        </>
-      )}
+      <Typography
+        variant="h6"
+        component="h2"
+        gutterBottom
+        align="center"
+        style={{ color: '#ccc', marginBottom: '15px' }}
+      >
+        Price according to the power law
+      </Typography>
+      <PriceChart
+        priceData={priceData}
+        kasPrice={kasPrice}
+        powerLawData={powerLawData}
+        isMobile={isMobileDeviceWithTouch()}
+      />
       <Typography
         component="h4"
         gutterBottom
@@ -290,19 +226,11 @@ function HomePage() {
       >
         FAQ
       </Typography>
-      {selectedChart === 'powerLaw' ? (
-        <PowerLawFAQ
-          isMobile ={isMobileDeviceWithTouch()}
-          handleTangemBuyNowClick={handleTangemBuyNowClick}
-          handleTangemAmazonBuyNowClick={handleTangemAmazonBuyNowClick}
-        />
-      ) : (
-        <SMACrossOverFAQ
-          isMobile ={isMobileDeviceWithTouch()}
-          handleTangemBuyNowClick={handleTangemBuyNowClick}
-          handleTangemAmazonBuyNowClick={handleTangemAmazonBuyNowClick}
-        />
-      )}
+      <PowerLawFAQ
+        isMobile={isMobileDeviceWithTouch()}
+        handleTangemBuyNowClick={handleTangemBuyNowClick}
+        handleTangemAmazonBuyNowClick={handleTangemAmazonBuyNowClick}
+      />
       <Typography variant="body1" component="p" style={{ color: '#fff', marginTop: 20, textAlign: 'center' }}>
         <strong>Follow me on 𝕏</strong>
       </Typography>
