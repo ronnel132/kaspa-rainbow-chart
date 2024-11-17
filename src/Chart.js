@@ -279,40 +279,19 @@ const PriceChart = ({ priceData, powerLawData, isMobile, kasPrice }) => {
     plugins: {
       annotation: {
         annotations: !isMobile ? {
-          krakenListing: {
+          mexcLaunch: {
             type: 'line',
-            xMin: new Date('2024-11-19').getTime(),
-            xMax: new Date('2024-11-19').getTime(),
+            xMin: new Date('2022-09-27').getTime(),
+            xMax: new Date('2022-09-27').getTime(),
             borderColor: 'rgba(255, 255, 255, 0.3)',
             borderWidth: 1,
             borderDash: [5, 5]
           },
-          krakenText: {
+          mexcText: {
             type: 'label',
-            xValue: new Date('2024-11-19').getTime(),
-            yValue: 0.00015, // Position at bottom of chart
-            content: 'Kraken Listing',
-            backgroundColor: 'rgba(0, 0, 0, 0.9)',
-            color: 'rgba(255, 255, 255, 1)',
-            font: {
-              size: 12
-            },
-            padding: 4,
-            position: 'start'
-          },
-          krc20Launch: {
-            type: 'line',
-            xMin: new Date('2024-09-15').getTime(),
-            xMax: new Date('2024-09-15').getTime(),
-            borderColor: 'rgba(255, 255, 255, 0.3)',
-            borderWidth: 1,
-            borderDash: [5, 5]
-          },
-          krc20Text: {
-            type: 'label',
-            xValue: new Date('2024-09-15').getTime(),
-            yValue: 0.0003, // Position at bottom of chart
-            content: 'KRC-20 Launch',
+            xValue: new Date('2022-09-27').getTime(),
+            yValue: 0.00002, // Position at bottom of chart
+            content: 'MEXC Listing',
             backgroundColor: 'rgba(0, 0, 0, 0.9)',
             color: 'rgba(255, 255, 255, 1)',
             font: {
@@ -332,7 +311,7 @@ const PriceChart = ({ priceData, powerLawData, isMobile, kasPrice }) => {
           gateIoText: {
             type: 'label',
             xValue: new Date('2023-03-21').getTime(),
-            yValue: 0.00015, // Position at bottom of chart
+            yValue: 0.00002, // Position at bottom of chart
             content: 'Gate IO Listing',
             backgroundColor: 'rgba(0, 0, 0, 0.9)',
             color: 'rgba(255, 255, 255, 1)',
@@ -353,7 +332,7 @@ const PriceChart = ({ priceData, powerLawData, isMobile, kasPrice }) => {
           kucoinText: {
             type: 'label',
             xValue: new Date('2023-05-06').getTime(),
-            yValue: 0.0003, // Position at bottom of chart
+            yValue: 0.00004, // Position at bottom of chart
             content: 'KuCoin Listing',
             backgroundColor: 'rgba(0, 0, 0, 0.9)',
             color: 'rgba(255, 255, 255, 1)',
@@ -363,19 +342,82 @@ const PriceChart = ({ priceData, powerLawData, isMobile, kasPrice }) => {
             padding: 4,
             position: 'start'
           },
-          mexcLaunch: {
+          bybitLaunch: {
             type: 'line',
-            xMin: new Date('2022-09-27').getTime(),
-            xMax: new Date('2022-09-27').getTime(),
+            xMin: new Date('2023-09-07').getTime(),
+            xMax: new Date('2023-09-07').getTime(),
             borderColor: 'rgba(255, 255, 255, 0.3)',
             borderWidth: 1,
             borderDash: [5, 5]
           },
-          mexcText: {
+          bybitText: {
             type: 'label',
-            xValue: new Date('2022-09-27').getTime(),
-            yValue: 0.00015, // Position at bottom of chart
-            content: 'MEXC Listing',
+            xValue: new Date('2023-09-07').getTime(),
+            yValue: 0.00002, // Position at bottom of chart
+            content: 'Bybit Listing',
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            color: 'rgba(255, 255, 255, 1)',
+            font: {
+              size: 12
+            },
+            padding: 4,
+            position: 'start'
+          },
+          binanceFuturesLaunch: {
+            type: 'line',
+            xMin: new Date('2023-11-17').getTime(),
+            xMax: new Date('2023-11-17').getTime(),
+            borderColor: 'rgba(255, 255, 255, 0.3)',
+            borderWidth: 1,
+            borderDash: [5, 5]
+          },
+          binanceFuturesText: {
+            type: 'label',
+            xValue: new Date('2023-11-17').getTime(),
+            yValue: 0.00004, // Position at bottom of chart
+            content: 'Binance Futures Listing',
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            color: 'rgba(255, 255, 255, 1)',
+            font: {
+              size: 12
+            },
+            padding: 4,
+            position: 'start'
+          },
+          krc20Launch: {
+            type: 'line',
+            xMin: new Date('2024-09-15').getTime(),
+            xMax: new Date('2024-09-15').getTime(),
+            borderColor: 'rgba(255, 255, 255, 0.3)',
+            borderWidth: 1,
+            borderDash: [5, 5]
+          },
+          krc20Text: {
+            type: 'label',
+            xValue: new Date('2024-09-15').getTime(),
+            yValue: 0.00004, // Position at bottom of chart
+            content: 'KRC-20 Launch',
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            color: 'rgba(255, 255, 255, 1)',
+            font: {
+              size: 12
+            },
+            padding: 4,
+            position: 'start'
+          },
+          krakenListing: {
+            type: 'line',
+            xMin: new Date('2024-11-19').getTime(),
+            xMax: new Date('2024-11-19').getTime(),
+            borderColor: 'rgba(255, 255, 255, 0.3)',
+            borderWidth: 1,
+            borderDash: [5, 5]
+          },
+          krakenText: {
+            type: 'label',
+            xValue: new Date('2024-11-19').getTime(),
+            yValue: 0.00002, // Position at bottom of chart
+            content: 'Kraken Listing',
             backgroundColor: 'rgba(0, 0, 0, 0.9)',
             color: 'rgba(255, 255, 255, 1)',
             font: {
