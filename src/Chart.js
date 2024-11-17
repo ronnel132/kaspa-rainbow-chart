@@ -278,22 +278,113 @@ const PriceChart = ({ priceData, powerLawData, isMobile, kasPrice }) => {
     },
     plugins: {
       annotation: {
-        annotations: dates
-          .filter((date) => date.getDate() === startDate.getDate() && date.getMonth() === startDate.getMonth())
-          .map((date) => ({
+        annotations: !isMobile ? {
+          krakenListing: {
             type: 'line',
-            xMin: date.getTime(),
-            xMax: date.getTime(),
-            borderColor: 'rgba(255, 255, 255, 1)',
+            xMin: new Date('2024-11-19').getTime(),
+            xMax: new Date('2024-11-19').getTime(),
+            borderColor: 'rgba(255, 255, 255, 0.3)',
             borderWidth: 1,
-            label: {
-              enabled: true,
-              content: date.toISOString().split('T')[0],
-              position: 'top',
-              backgroundColor: 'rgba(255, 255, 255, 1)',
-              color: 'black',
+            borderDash: [5, 5]
+          },
+          krakenText: {
+            type: 'label',
+            xValue: new Date('2024-11-19').getTime(),
+            yValue: 0.00015, // Position at bottom of chart
+            content: 'Kraken Listing',
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            color: 'rgba(255, 255, 255, 1)',
+            font: {
+              size: 12
             },
-          })),
+            padding: 4,
+            position: 'start'
+          },
+          krc20Launch: {
+            type: 'line',
+            xMin: new Date('2024-09-15').getTime(),
+            xMax: new Date('2024-09-15').getTime(),
+            borderColor: 'rgba(255, 255, 255, 0.3)',
+            borderWidth: 1,
+            borderDash: [5, 5]
+          },
+          krc20Text: {
+            type: 'label',
+            xValue: new Date('2024-09-15').getTime(),
+            yValue: 0.0003, // Position at bottom of chart
+            content: 'KRC-20 Launch',
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            color: 'rgba(255, 255, 255, 1)',
+            font: {
+              size: 12
+            },
+            padding: 4,
+            position: 'start'
+          },
+          gateIoLaunch: {
+            type: 'line',
+            xMin: new Date('2023-03-21').getTime(),
+            xMax: new Date('2023-03-21').getTime(),
+            borderColor: 'rgba(255, 255, 255, 0.3)',
+            borderWidth: 1,
+            borderDash: [5, 5]
+          },
+          gateIoText: {
+            type: 'label',
+            xValue: new Date('2023-03-21').getTime(),
+            yValue: 0.00015, // Position at bottom of chart
+            content: 'Gate IO Listing',
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            color: 'rgba(255, 255, 255, 1)',
+            font: {
+              size: 12
+            },
+            padding: 4,
+            position: 'start'
+          },
+          kucoinLaunch: {
+            type: 'line',
+            xMin: new Date('2023-05-06').getTime(),
+            xMax: new Date('2023-05-06').getTime(),
+            borderColor: 'rgba(255, 255, 255, 0.3)',
+            borderWidth: 1,
+            borderDash: [5, 5]
+          },
+          kucoinText: {
+            type: 'label',
+            xValue: new Date('2023-05-06').getTime(),
+            yValue: 0.0003, // Position at bottom of chart
+            content: 'KuCoin Listing',
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            color: 'rgba(255, 255, 255, 1)',
+            font: {
+              size: 12
+            },
+            padding: 4,
+            position: 'start'
+          },
+          mexcLaunch: {
+            type: 'line',
+            xMin: new Date('2022-09-27').getTime(),
+            xMax: new Date('2022-09-27').getTime(),
+            borderColor: 'rgba(255, 255, 255, 0.3)',
+            borderWidth: 1,
+            borderDash: [5, 5]
+          },
+          mexcText: {
+            type: 'label',
+            xValue: new Date('2022-09-27').getTime(),
+            yValue: 0.00015, // Position at bottom of chart
+            content: 'MEXC Listing',
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            color: 'rgba(255, 255, 255, 1)',
+            font: {
+              size: 12
+            },
+            padding: 4,
+            position: 'start'
+          },
+        } : {},
       },
       zoom: {
         pan: {
