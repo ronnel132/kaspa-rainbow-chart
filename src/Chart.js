@@ -140,7 +140,7 @@ const PriceChart = ({ priceData, powerLawData, isMobile, kasPrice }) => {
     labels: dates.map((date) => date.getTime()),
     datasets: [
       {
-        label: 'Kaspa is NOT Dead',
+        label: 'Kaspa is Dead',
         data: band1Prices,
         borderColor: '#D27FFF',
         backgroundColor: '#D27FFF',
