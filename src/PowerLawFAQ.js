@@ -6,7 +6,7 @@ import tangem_step1 from './assets/tangem-step1.png';
 import tangem_step2 from './assets/tangem-step2.png';
 import tangem_step3 from './assets/tangem-step3.png';
 
-const PowerLawFAQ = ({ isMobile, handleTangemBuyNowClick, handleTangemAmazonBuyNowClick }) => {
+const PowerLawFAQ = ({ isMobile, handleTangemBuyNowClick, handleTangemAmazonBuyNowClick, powerLawData }) => {
   return (
     <Paper
       elevation={3}
@@ -40,21 +40,7 @@ const PowerLawFAQ = ({ isMobile, handleTangemBuyNowClick, handleTangemAmazonBuyN
         <strong>3) How is this calculated?</strong>
       </Typography>
       <Typography variant="body2" component="p" style={{ color: '#ccc' }}>
-        Support price is calculated as 10^-13.41344198 * (ΔGB)^4.218461.
-      </Typography>
-      <Typography
-        variant="body2"
-        component="p"
-        style={{ marginTop: '10px', color: '#ccc' }}
-      >
-        Resistance price is calculated as 10^-13.10611888 * (ΔGB)^4.218461.
-      </Typography>
-      <Typography
-        variant="body2"
-        component="p"
-        style={{ marginTop: '10px', color: '#ccc' }}
-      >
-        Fair price is calculated as 10^-13.25978043 * (ΔGB)^4.218461.
+        Fair price is calculated as 10^{powerLawData?.power_law_intercept} * (ΔGB)^{powerLawData?.power_law_slope}.
       </Typography>
       <Typography
         variant="body2"
@@ -68,7 +54,7 @@ const PowerLawFAQ = ({ isMobile, handleTangemBuyNowClick, handleTangemAmazonBuyN
         component="p"
         style={{ marginTop: '10px', color: '#ccc', fontStyle: 'italic' }}
       >
-        [Power Law Equations Updated 2024-07-22]
+        [Power Law Equations Updated {powerLawData?.date}]
       </Typography>
       <Typography variant="body1" component="p" style={{ color: '#fff', marginTop: 20 }}>
         <strong>4) Where can I learn more about Kaspa?</strong>

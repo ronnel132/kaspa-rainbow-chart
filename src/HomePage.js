@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Container, Typography, Box, Grid, Button } from '@mui/material';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { LOG_ACTION, GET_KAS_PRICE, GET_POWER_LAW } from './constants/urls';
+import { LOG_ACTION, GET_KAS_PRICE, GET_POWER_LAW, GET_HISTORICAL } from './constants/urls';
 import PriceChart from './Chart';
 import PowerLawFAQ from './PowerLawFAQ';
 import {
@@ -67,18 +67,25 @@ function HomePage() {
   }, []);
 
   useEffect(() => {
-    fetch('/prices.json')
-      .then((response) => response.json())
-      .then((data) => {
+    // Fetch historical price data
+    async function fetchHistoricalPriceData() {
+      try {
+        const response = await fetch(GET_HISTORICAL);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
         const transformedData = data.map((item) => {
           return {
             date: item.date,
-            price: parseFloat(parseFloat(item.price.replace('$', '')).toFixed(7)),
+            price: parseFloat(parseFloat(item.price).toFixed(7)),
           };
         });
         setPriceData(transformedData);
-      })
-      .catch((error) => console.error('Error fetching the prices data:', error));
+      } catch (error) {
+        console.error('Error fetching historical price data:', error);
+      }
+    }
 
     // Fetch KAS price
     fetch(GET_KAS_PRICE)
@@ -88,13 +95,15 @@ function HomePage() {
       })
       .catch(error => console.error('Error fetching KAS price:', error));
 
-    // Fetch Power Law data
-    fetch(GET_POWER_LAW)
+    // Fetch Power Law data with latest=true parameter
+    fetch(`${GET_POWER_LAW}?latest=true`)
       .then(response => response.json())
       .then(data => {
         setPowerLawData(data);
       })
       .catch(error => console.error('Error fetching Power Law data:', error));
+
+    fetchHistoricalPriceData();
   }, []);
 
   const isMobileDeviceWithTouch = () => {
@@ -208,7 +217,7 @@ function HomePage() {
         align="center"
         style={{ color: '#ccc', marginTop: '35px', marginBottom: '15px' }}
       >
-        Also check out <a style={{ color: "white" }} href="https://kaspapowerlaw.com">KaspaPowerLaw.com</a> for the Kaspa Fair Price Calculator.
+        Also check out <a style={{ color: "white" }} href="https://kaspapowerlaw.com">KaspaPowerLaw.com</a> for the Kaspa Fair Price Calculator and <a style={{ color: "white" }} href="https://kaspainsights.com">KaspaInsights.com</a> for Kaspa on-chain and price analytics.
       </Typography>
       <Box
         display="flex"
@@ -230,6 +239,7 @@ function HomePage() {
         isMobile={isMobileDeviceWithTouch()}
         handleTangemBuyNowClick={handleTangemBuyNowClick}
         handleTangemAmazonBuyNowClick={handleTangemAmazonBuyNowClick}
+        powerLawData={powerLawData}
       />
       <Typography variant="body1" component="p" style={{ color: '#fff', marginTop: 20, textAlign: 'center' }}>
         <strong>Follow me on 𝕏</strong>
