@@ -426,6 +426,27 @@ const PriceChart = ({ priceData, powerLawData, isMobile, kasPrice }) => {
             padding: 4,
             position: 'start'
           },
+          coinbaseFuturesLaunch: {
+            type: 'line',
+            xMin: new Date('2025-02-20').getTime(),
+            xMax: new Date('2025-02-20').getTime(),
+            borderColor: 'rgba(255, 255, 255, 0.3)',
+            borderWidth: 1,
+            borderDash: [5, 5]
+          },
+          coinbaseFuturesText: {
+            type: 'label',
+            xValue: new Date('2025-02-20').getTime(),
+            yValue: 0.00004, // Position at bottom of chart
+            content: 'Coinbase Futures Listing',
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
+            color: 'rgba(255, 255, 255, 1)',
+            font: {
+              size: 12
+            },
+            padding: 4,
+            position: 'start',
+          },
         } : {},
       },
       zoom: {
